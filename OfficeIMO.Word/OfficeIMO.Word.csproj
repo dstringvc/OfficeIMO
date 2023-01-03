@@ -6,14 +6,18 @@
         <AssemblyTitle>OfficeIMO.Word</AssemblyTitle>
 
         <VersionPrefix>0.4.2</VersionPrefix>
+				<!--
         <TargetFrameworks Condition=" '$([MSBuild]::IsOsPlatform(`Windows`))' ">netstandard2.0;netstandard2.1;net472;net48;net6.0;net7.0</TargetFrameworks>
         <TargetFrameworks Condition=" '$([MSBuild]::IsOsPlatform(`OSX`))'  Or '$([MSBuild]::IsOsPlatform(`Linux`))' ">net6.0;net7.0</TargetFrameworks>
+				-->
+				<TargetFrameworks Condition=" '$([MSBuild]::IsOsPlatform(`Windows`))' ">netstandard2.0;netstandard2.1;net472;net48;net6.0</TargetFrameworks>
         <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
         <Company>Evotec</Company>
         <Authors>Przemyslaw Klys</Authors>
 
         <PackageId>OfficeIMO.Word</PackageId>
-        <PackageTags>docx;net60;word;office;openxml;net472;net48;net50;netstandard;netstandard2.0,netstandard2.1;net70</PackageTags>
+        <!--<PackageTags>docx;net60;word;office;openxml;net472;net48;net50;netstandard;netstandard2.0,netstandard2.1;net70</PackageTags>-->
+				<PackageTags>docx;net60;word;office;openxml;net472;net48;net50;netstandard;netstandard2.0,netstandard2.1</PackageTags>
         <PackageProjectUrl>https://github.com/evotecit/OfficeIMO</PackageProjectUrl>
         <PackageLicenseUrl>https://github.com/evotecit/OfficeIMO/blob/master/License.md</PackageLicenseUrl>
         <DelaySign>False</DelaySign>

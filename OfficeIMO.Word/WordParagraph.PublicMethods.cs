@@ -273,5 +273,26 @@ namespace OfficeIMO.Word {
             var hyperlink = WordHyperLink.AddHyperLink(this, text, anchor, addStyle, tooltip, history);
             return this;
         }
+
+				/// <summary>
+				/// Add hyperlink with URL and formatting to a word document
+				/// </summary>
+				/// <param name="text"></param>
+				/// <param name="uri"></param>
+				/// <param name="runProps"></param>
+				/// <param name="tooltip"></param>
+				/// <param name="history"></param>
+				/// <returns></returns>
+				public WordParagraph AddHyperLink(string text, Uri uri, RunProperties runProps, string tooltip = "", bool history = true)
+				{
+					var hyperlink = WordHyperLink.AddHyperLink(this, text, uri, runProps, tooltip, history);
+					return this;
+				}
+
+				public WordParagraph AddHyperLink(string text, Uri uri, string colorHex, bool bold, int fontSize = 11, string tooltip = "", bool history = true)
+				{
+					var hyperlink = WordHyperLink.AddHyperLink(this, text, uri, colorHex, bold, fontSize);
+					return this;
+				}
     }
 }

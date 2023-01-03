@@ -51,6 +51,16 @@ namespace OfficeIMO.Word {
             return this.AddParagraph().AddHyperLink(text, anchor, addStyle, tooltip, history);
         }
 
+				public WordParagraph AddHyperLink(string text, Uri uri, RunProperties runProps, string tooltip = "", bool history = true)
+				{
+					return this.AddParagraph().AddHyperLink(text, uri, runProps, tooltip, history);
+				}
+
+				public WordParagraph AddHyperLink(string text, Uri uri, string colorHex, bool bold, int fontSize = 11, string tooltip = "", bool history = true)
+				{
+					return this.AddParagraph().AddHyperLink(text, uri, colorHex, bold, fontSize, tooltip, history);
+				}
+
         public WordChart AddBarChart() {
             var paragraph = this.AddParagraph();
             var barChart = WordBarChart.AddBarChart(this, paragraph);

@@ -263,5 +263,112 @@ namespace OfficeIMO.Word {
             paragraph._hyperlink = hyperlink;
             return paragraph;
         }
+
+				/// <summary>
+				/// Adds a hyperlink to the supplied paragraph
+				/// This overload accepts a RunStyle object to style the hyperlink.
+				/// </summary>
+				/// <param name="paragraph"></param>
+				/// <param name="text"></param>
+				/// <param name="uri"></param>
+				/// <param name="runProps">A RunProperties object that will be applied to the paragraph/run where the hyperlink is created</param>
+				/// <param name="tooltip"></param>
+				/// <param name="history"></param>
+				/// <returns></returns>
+				public static WordParagraph AddHyperLink(WordParagraph paragraph, string text, Uri uri, RunProperties runProps, string tooltip = "", bool history = true)
+				{
+					HyperlinkRelationship rel;
+					if (paragraph.Parent == "body") 
+					{
+						rel = paragraph._document._wordprocessingDocument.MainDocumentPart.AddHyperlinkRelationship(uri, true);
+					} 
+					else if (paragraph.Parent == "header") 
+					{
+						Header header = (Header)paragraph._paragraph.Parent;
+						rel = header.HeaderPart.AddHyperlinkRelationship(uri, true);
+					} 
+					else if (paragraph.Parent == "footer") 
+					{
+						Footer footer = (Footer)paragraph._paragraph.Parent;
+						rel = footer.FooterPart.AddHyperlinkRelationship(uri, true);
+					} else 
+					{
+						throw new NotImplementedException("Where else should we add this?");
+					}
+
+					Hyperlink hyperlink = new Hyperlink() {
+						Id = rel.Id,
+						History = history,
+					};
+
+					Run run = new Run(new Text(text) {
+						Space = SpaceProcessingModeValues.Preserve
+					});
+
+					// Styling for the hyperlink
+					if (runProps != null) {
+						run.RunProperties = runProps;
+					}
+
+					if (tooltip != "") {
+						hyperlink.Tooltip = tooltip;
+					}
+
+					hyperlink.Append(run);
+					paragraph._paragraph.Append(hyperlink);
+					paragraph._hyperlink = hyperlink;
+					return paragraph;
+				}
+
+				public static WordParagraph AddHyperLink(WordParagraph paragraph, string text, Uri uri, string colorHex, bool bold, int fontSize = 11, string tooltip = "", bool history = true)
+				{
+					HyperlinkRelationship rel;
+					if (paragraph.Parent == "body") 
+					{
+						rel = paragraph._document._wordprocessingDocument.MainDocumentPart.AddHyperlinkRelationship(uri, true);
+					} 
+					else if (paragraph.Parent == "header") 
+					{
+						Header header = (Header)paragraph._paragraph.Parent;
+						rel = header.HeaderPart.AddHyperlinkRelationship(uri, true);
+					} 
+					else if (paragraph.Parent == "footer") 
+					{
+						Footer footer = (Footer)paragraph._paragraph.Parent;
+						rel = footer.FooterPart.AddHyperlinkRelationship(uri, true);
+					} else 
+					{
+						throw new NotImplementedException("Where else should we add this?");
+					}
+
+					Hyperlink hyperlink = new Hyperlink() {
+						Id = rel.Id,
+						History = history,
+					};
+
+					Run run = new Run(new Text(text) {
+						Space = SpaceProcessingModeValues.Preserve
+					});
+
+					// Styling for the hyperlink
+					// if (runProps != null) {
+					// 	run.RunProperties = runProps;
+					// }
+					RunProperties runProps = new RunProperties();
+					runProps.Append(new FontSize(){ Val = (fontSize * 2).ToString() });
+					if (!string.IsNullOrEmpty(colorHex)) runProps.Append(new Color(){ Val = "1C8FD6" });
+					if (bold) runProps.Append(new Bold());
+					run.RunProperties = runProps;
+
+					if (tooltip != "") {
+						hyperlink.Tooltip = tooltip;
+					}
+
+					hyperlink.Append(run);
+					paragraph._paragraph.Append(hyperlink);
+					paragraph._hyperlink = hyperlink;
+					return paragraph;
+
+				}
     }
 }
