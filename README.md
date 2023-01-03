@@ -15,6 +15,8 @@ If you would like to contact me you can do so via Twitter or LinkedIn.
 
 ## What it's all about
 
+**I created this fork to address issues with hyperlink formatting.** *DStringfellow, 1-Jan-2023*
+
 This is a small project (under development) that allows to create Microsoft Word documents (.docx) using .NET.
 Underneath it uses [OpenXML SDK](https://github.com/OfficeDev/Open-XML-SDK) but heavily simplifies it.
 It was created because working with OpenXML is way too hard for me, and time consuming.
